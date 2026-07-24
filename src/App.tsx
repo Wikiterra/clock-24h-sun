@@ -1,13 +1,27 @@
 import { useState, useEffect } from "react";
 import { Clock } from "./components/Clock";
-// import tzlookup from "tz-lookup";
+
+// Madrid fallback if geolocation is denied/unavailable
+const DEFAULT_LAT = 40.4168;
+const DEFAULT_LON = -3.7038;
 
 function App() {
   const [now, setNow] = useState(new Date());
+  const [lat, setLat] = useState(DEFAULT_LAT);
+  const [lon, setLon] = useState(DEFAULT_LON);
 
-  // your location (example: Madrid)
-    const lat = 40.4168;
-    const lon = -3.7038;
+  useEffect(() => {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLat(position.coords.latitude);
+        setLon(position.coords.longitude);
+      },
+      () => {
+        // permission denied or unavailable: keep Madrid fallback
+      }
+    );
+  }, []);
 
   // update every minute
   useEffect(() => {

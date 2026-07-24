@@ -13,8 +13,7 @@
     "luxon": "^3.7.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "suncalc": "^1.9.0",
-    "tz-lookup": "^6.1.25"
+    "suncalc": "^1.9.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
